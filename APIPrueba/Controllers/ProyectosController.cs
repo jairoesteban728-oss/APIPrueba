@@ -38,6 +38,15 @@ namespace APIPrueba.Controllers
             return Ok(item);
         }
 
+        [HttpGet("by-activo/{activo}")]
+        public async Task<ActionResult<IEnumerable<proyectos>>> GetByActivo(int activo)
+        {
+            var proyectos = await _context.Proyectos.AsNoTracking().Where(p => p.Activo == activo).ToListAsync();
+            return Ok(proyectos);
+        }
+
+        
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] proyectos proyecto)
         {
